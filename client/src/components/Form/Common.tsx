@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { Button, Form, Spinner } from 'react-bootstrap';
-import { Field, Link as LinkObject } from '../Objects';
+import { Field, Link as LinkObject, Option } from '../Objects';
 
 export const formatFormDatas = (elements: any) => [].reduce.call(elements, (data: any, element: any) => {
     if ('' !== element.value) {
@@ -23,11 +23,21 @@ export const generateFields: any = (fields: Field[], isLoading: boolean = false)
             }
             <Form.Control
                 name={field.name}
+                className={'select' === field.type ? 'custom-select' : null}
                 type={field.type || 'text'}
-                as={'textarea' === field.type ? 'textarea' : 'input'}
+                as={'textarea' === field.type || 'select' === field.type ? field.type : 'input'}
                 placeholder={field.placeholder && field.placeholder}
                 disabled={isLoading}
-            />
+            >
+                {
+                    'select' === field.type && field.options ?
+                        field.options.map((option: Option) =>
+                            <option value={ option.value }>
+                                { option.text }
+                                </option>
+                        ) : null
+                }
+            </Form.Control>
             {
                 field.text && (
                     <Form.Label>

@@ -1,3 +1,8 @@
+export interface Option {
+    value: string;
+    text: string;
+}
+
 export interface Field {
     label: string;
     text?: string;
@@ -5,6 +10,7 @@ export interface Field {
     placeholder: string;
     name: string;
     className?: string;
+    options?: Option[];
 }
 
 export interface Link {
@@ -18,6 +24,7 @@ export interface Image {
 }
 
 export interface Category {
+    '@id': string;
     name: string;
     description: string;
     color: string;

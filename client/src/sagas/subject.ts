@@ -1,5 +1,8 @@
 import { commonRequest, encodeParams, getUrl } from './common';
 import {
+    SUBJECT_CREATE_FAILED,
+    SUBJECT_CREATE_REQUEST,
+    SUBJECT_CREATE_SUCCESS,
     SUBJECT_FETCH_FAILED,
     SUBJECT_FETCH_REQUEST,
     SUBJECT_FETCH_SUCCESS,
@@ -55,6 +58,17 @@ export const handleSubject = async (action: any) => {
                 callback: {
                     error: SUBJECT_LIKE_UPDATE_FAILED,
                     success: SUBJECT_LIKE_UPDATE_SUCCESS,
+                }
+            });
+        case SUBJECT_CREATE_REQUEST:
+            return await commonRequest({
+                path: `/subjects`,
+                dispatch,
+                body: payload,
+                method: 'POST',
+                callback: {
+                    error: SUBJECT_CREATE_FAILED,
+                    success: SUBJECT_CREATE_SUCCESS,
                 }
             });
         default:

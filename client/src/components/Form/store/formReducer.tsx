@@ -1,5 +1,6 @@
 import * as user from '../../User/store/action';
 import * as response from '../../Response/store/action';
+import * as subject from '../../Item/store/action';
 import { Reducer } from "redux";
 
 export interface FormReducerProps {
@@ -15,6 +16,8 @@ export const FormReducer: Reducer = (state: FormReducerProps = { isFetching: fal
         case user.REGISTER_SUCCESS:
         case response.RESPONSE_CREATE_SUCCESS:
         case response.RESPONSE_CREATE_FAILED:
+        case subject.SUBJECT_CREATE_FAILED:
+        case subject.SUBJECT_CREATE_SUCCESS:
             return {
                 ...state,
                 isFetching: false
@@ -22,6 +25,7 @@ export const FormReducer: Reducer = (state: FormReducerProps = { isFetching: fal
         case user.LOGIN_REQUEST:
         case user.REGISTER_REQUEST:
         case response.RESPONSE_CREATE_REQUEST:
+        case subject.SUBJECT_CREATE_REQUEST:
             return {
                 ...state,
                 isFetching: true,

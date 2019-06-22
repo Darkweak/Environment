@@ -16,7 +16,6 @@ const author: Field = {
     placeholder: 'Auteur',
     name: 'subjectCreator.username',
     label: 'Chercher un auteur',
-    type: 'select',
     className: 'col-sm-12 col-md-4'
 };
 

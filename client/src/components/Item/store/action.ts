@@ -1,5 +1,8 @@
 import { handleSubject } from "../../../sagas/subject";
 
+export const SUBJECT_CREATE_FAILED = 'SUBJECT_CREATE_FAILED';
+export const SUBJECT_CREATE_REQUEST = 'SUBJECT_CREATE_REQUEST';
+export const SUBJECT_CREATE_SUCCESS = 'SUBJECT_CREATE_SUCCESS';
 export const SUBJECT_FETCH_FAILED = 'SUBJECT_FETCH_FAILED';
 export const SUBJECT_FETCH_REQUEST = 'SUBJECT_FETCH_REQUEST';
 export const SUBJECT_FETCH_SUCCESS = 'SUBJECT_FETCH_SUCCESS';
@@ -36,3 +39,12 @@ export const updateLikeSubject = (payload: any) => async(dispatch: any) => {
         payload
     })
 };
+
+export const createSubject = (payload: any) => async(dispatch: any) => {
+    dispatch({ type: SUBJECT_CREATE_REQUEST });
+    return handleSubject({
+        dispatch,
+        type: SUBJECT_CREATE_REQUEST,
+        payload
+    })
+}

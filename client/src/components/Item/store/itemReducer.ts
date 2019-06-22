@@ -1,7 +1,7 @@
 import * as actions from './action';
 import { Subject } from "../../Objects";
 import { Reducer } from "redux";
-import { getUsername } from "../../../helpers";
+import { getUsername, resetForm } from "../../../helpers";
 
 export interface SubjectReducerProps {
     isError: boolean,
@@ -12,6 +12,7 @@ export interface SubjectReducerProps {
     likesCount: number,
     likedItem: boolean,
     subjects: Subject[]
+    subjectsCreated: Subject[]
 }
 
 export const SubjectReducer: Reducer = (state: SubjectReducerProps = {
@@ -22,10 +23,31 @@ export const SubjectReducer: Reducer = (state: SubjectReducerProps = {
     isFetchingItem: false,
     likesCount: 0,
     likedItem: false,
-    subjects: []
+    subjects: [],
+    subjectsCreated: []
 }, action: any) => {
     const {type, payload} = action;
     switch (type) {
+        case actions.SUBJECT_CREATE_FAILED:
+            return {
+                ...state,
+                isError: true
+            };
+        case actions.SUBJECT_CREATE_REQUEST:
+            return {
+                ...state,
+                isError: false
+            };
+        case actions.SUBJECT_CREATE_SUCCESS:
+            let subjectsCreated = state.subjectsCreated;
+            subjectsCreated.push(payload);
+            console.log(subjectsCreated);
+            resetForm();
+            return {
+                ...state,
+                isError: false,
+                subjectsCreated
+            };
         case actions.SUBJECT_FETCH_FAILED:
             return {
                 ...state,
@@ -40,15 +62,11 @@ export const SubjectReducer: Reducer = (state: SubjectReducerProps = {
                 isFetchingList: true,
             };
         case actions.SUBJECT_FETCH_SUCCESS:
-            let subjects: Subject[] = [];
-            payload.map((item: Subject) => {
-                subjects.push(item)
-            });
             return {
                 ...state,
                 isError: false,
                 isFetchingList: false,
-                subjects
+                subjects: payload
             };
         case actions.SUBJECT_ITEM_FETCH_FAILED:
             return {

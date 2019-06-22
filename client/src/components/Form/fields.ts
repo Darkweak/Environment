@@ -32,3 +32,29 @@ export const response: Field = {
     name: 'description',
     type: 'textarea'
 };
+
+export const name: Field = {
+    label: 'Nom du sujet',
+    placeholder: 'Nom du sujet',
+    name: 'name',
+};
+
+export const description: Field = {
+    label: 'Description du sujet',
+    placeholder: 'Description du sujet',
+    name: 'description',
+    type: 'textarea'
+};
+
+export const image: Field = {
+    label: 'Lien de l\'image',
+    placeholder: 'https://liendevotreimage',
+    name: 'imageUrl'
+};
+
+export const category: Field = {
+    label: 'Sélection de la catégorie',
+    name: 'category',
+    placeholder: 'Sélection de la catégorie',
+    type: 'select'
+};

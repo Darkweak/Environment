@@ -1,6 +1,7 @@
 import * as actions from './action';
 import { Category } from "../../Objects";
 import { Reducer } from "redux";
+import { setCategories } from "../../../helpers";
 
 export interface CategoryReducerProps {
     isError: boolean,
@@ -29,6 +30,7 @@ export const CategoryReducer: Reducer = (state: CategoryReducerProps = {
                 isFetching: true
             };
         case actions.CATEGORY_FETCH_SUCCESS:
+            setCategories(JSON.stringify(payload));
             return {
                 ...state,
                 isError: false,

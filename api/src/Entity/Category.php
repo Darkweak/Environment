@@ -14,7 +14,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ApiResource(
  *     	attributes={
- *     		"access_control": "is_granted('ROLE_ADMIN')"
+ *     		"access_control": "is_granted('ROLE_ADMIN')",
+ *     		"order"={"id": "DESC", "subjects.id": "ASC"}
  *	 	},
  *     	itemOperations={
  *     		"get": {

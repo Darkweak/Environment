@@ -10,14 +10,12 @@ trait ImageTrait
 {
 	/**
 	 * @ORM\Column
-	 * @Assert\NotBlank
 	 * @Groups({"category_read_list", "subjects_read_list"})
 	 */
 	public $imageUrl;
 
 	/**
 	 * @ORM\Column
-	 * @Assert\NotBlank
 	 * @Groups({"category_read_list", "subjects_read_list"})
 	 */
 	public $imageName;
