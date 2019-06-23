@@ -32,6 +32,7 @@ export interface Category {
 }
 
 export interface User {
+    email: string;
     username: string;
     subjectsOwned?: Subject[];
     subjectResponses?: SubjectResponse[];
@@ -55,6 +56,7 @@ export interface SubjectResponse {
     description: string;
     responseCreator: User;
     responseLikes?: ResponseLike[];
+    subject: Subject;
 }
 
 export interface ResponseLike {
@@ -64,5 +66,5 @@ export interface ResponseLike {
 
 export interface SubjectLike {
     userLike: User;
-    subject: Subject;
+    likeSubject: Subject;
 }

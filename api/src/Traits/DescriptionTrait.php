@@ -11,7 +11,7 @@ trait DescriptionTrait
 	/**
 	 * @ORM\Column(type="text")
 	 * @Assert\NotBlank
-	 * @Groups({"category_read_list", "subjects_read_list", "subject_read_item", "response_create_item"})
+	 * @Groups({"category_read_list", "subjects_read_list", "subject_read_item", "response_create_item", "profile_read"})
 	 */
 	public $description;
 

@@ -4,3 +4,7 @@
 
 login:
   path: /login
+
+change-password:
+  path: /change-password
+  controller: App\Controller\ChangePassword

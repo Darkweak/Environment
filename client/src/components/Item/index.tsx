@@ -32,7 +32,7 @@ export const ItemList = ({ item }: IItemList) => (
     <div className="card-body position-relative d-flex">
       <p className="card-text"><i className="fa fa-comment-alt"/> {item.responsesCount}</p>
       <p className="card-text ml-auto">
-          <i className="fa fa-user-circle"/> <Link to={`/user/${item.subjectCreator.username}`}>{item.subjectCreator.username}</Link>
+          <i className="fa fa-user-circle"/> {item.subjectCreator.username}
       </p>
     </div>
   </div>

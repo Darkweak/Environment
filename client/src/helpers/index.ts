@@ -1,7 +1,12 @@
 import decode from 'jwt-decode';
 
 const isWindow = () => typeof window !== 'undefined';
-export const resetForm = () => document.getElementsByTagName('form')[0].reset();
+export const resetForm = () => {
+    let forms = document.getElementsByTagName('form');
+    for (let i = 0; i < forms.length; i++) {
+        forms[i].reset();
+    }
+};
 
 const CATEGORIES = 'categories';
 const TOKEN = 'token';

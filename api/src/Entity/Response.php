@@ -50,6 +50,7 @@ class Response
 
 	/**
 	 * @ORM\ManyToOne(targetEntity=Subject::class, inversedBy="responses")
+	 * @Groups({"profile_read"})
 	 */
 	private $subject;
 

@@ -4,8 +4,18 @@ import { Item as CategoryItem } from "./components/Category/Item";
 import { List as SubjectList } from "./components/Item/List";
 import { Item as SubjectItem } from "./components/Item/Item";
 import { Connection } from "./components/Connection";
+import { Profile } from "./components/User";
+import { ChangePassword } from "./components/User/ChangePassword";
 
 export const routes = [
+    {
+        component: ChangePassword,
+        path: '/change-password'
+    },
+    {
+        component: Profile,
+        path: '/profile'
+    },
     {
         component: SubjectItem,
         path: '/subjects/:id'

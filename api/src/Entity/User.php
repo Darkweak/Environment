@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Controller\FindMe;
 use App\Repository\UserRepository;
 use App\Traits\IdTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -18,16 +19,17 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     		"access_control": "is_granted('ROLE_USER')"
  *	 	},
  *     	itemOperations={
- *     		"get": {
- *     			"access_control": "is_granted('ROLE_USER')"
- *	 		},
- *     		"put",
- *     		"delete"
+ *     		"get"
  *	 	},
  *     	collectionOperations={
  *     		"get": {
- *     			"access_control": "is_granted('ROLE_ADMIN')",
- *     			"api_entrypoint": "false"
+ *     			"access_control": "is_granted('ROLE_ADMIN')"
+ *	 		},
+ *     		"get_me": {
+ * 				"normalization_context": {"groups": {"profile_read"}},
+ *         		"method"="GET",
+ *         		"path"="/me",
+ *         		"controller"=FindMe::class
  *	 		},
  *     		"post": {
  *     			"access_control": "is_granted('IS_AUTHENTICATED_ANONYMOUSLY')",
@@ -46,7 +48,7 @@ class User implements UserInterface
 	/**
 	 * @ORM\Column(unique=true)
 	 * @Assert\NotBlank
-	 * @Groups({"category_read_list", "subjects_read_list", "subject_read_item", "user_read_create", "user_write_create", "response_create_item"})
+	 * @Groups({"category_read_list", "subjects_read_list", "subject_read_item", "user_read_create", "user_write_create", "response_create_item", "profile_read"})
 	 */
 	private $username;
 
@@ -54,14 +56,14 @@ class User implements UserInterface
 	 * @ORM\Column(unique=true)
 	 * @Assert\NotBlank
 	 * @Assert\Email
-	 * @Groups({"user_read_create", "user_write_create"})
+	 * @Groups({"user_read_create", "user_write_create", "profile_read"})
 	 */
 	private $email;
 
 	/**
 	 * @ORM\Column
 	 * @Assert\NotBlank
-	 * @Groups({"user_read_create", "user_write_create"})
+	 * @Groups({"user_read_create", "user_write_create", "profile_read"})
 	 */
 	private $password;
 
@@ -77,21 +79,19 @@ class User implements UserInterface
 
 	/**
 	 * @ORM\OneToMany(targetEntity=Subject::class, mappedBy="subjectCreator")
+	 * @Groups({"profile_read"})
 	 */
 	private $subjectsOwned;
 
 	/**
 	 * @ORM\OneToMany(targetEntity=Response::class, mappedBy="responseCreator")
+	 * @Groups({"profile_read"})
 	 */
 	private $subjectResponses;
 
 	/**
-	 * @ORM\OneToMany(targetEntity=UserResponseLike::class, mappedBy="likeOwner")
-	 */
-	private $userResponseLikes;
-
-	/**
 	 * @ORM\OneToMany(targetEntity=UserSubjectLike::class, mappedBy="likeOwner")
+	 * @Groups({"profile_read"})
 	 */
 	private $userSubjectLikes;
 
@@ -99,7 +99,6 @@ class User implements UserInterface
 	{
 		$this->subjectsOwned = new ArrayCollection();
 		$this->subjectResponses = new ArrayCollection();
-		$this->userResponseLikes = new ArrayCollection();
 		$this->userSubjectLikes = new ArrayCollection();
 	}
 
@@ -221,31 +220,6 @@ class User implements UserInterface
 	public function removeSubjectResponses(Response $subject): self
 	{
 		$this->subjectResponses->removeElement($subject);
-		return $this;
-	}
-
-	public function getUserResponseLikes(): Collection
-	{
-		return $this->userResponseLikes;
-	}
-
-	public function setUserResponseLikes(Collection $userResponseLikes): self
-	{
-		$this->userResponseLikes = $userResponseLikes;
-		return $this;
-	}
-
-	public function addUserResponseLikes(UserResponseLike $userResponseLikes): self
-	{
-		if (!$this->userResponseLikes->contains($userResponseLikes)) {
-			$this->userResponseLikes->add($userResponseLikes);
-		}
-		return $this;
-	}
-
-	public function removeUserResponseLikes(UserResponseLike $userResponseLikes): self
-	{
-		$this->userResponseLikes->removeElement($userResponseLikes);
 		return $this;
 	}
 

@@ -11,7 +11,7 @@ trait NameTrait
 	/**
 	 * @ORM\Column
 	 * @Assert\NotBlank
-	 * @Groups({"category_read_list", "subjects_read_list", "subject_read_item"})
+	 * @Groups({"category_read_list", "subjects_read_list", "subject_read_item", "profile_read"})
 	 */
 	public $name;
 

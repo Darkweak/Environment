@@ -42,6 +42,7 @@ class UserSubjectLike
 	/**
 	 * @ORM\Id
 	 * @ORM\ManyToOne(targetEntity=Subject::class, inversedBy="subjectLikes")
+	 * @Groups({"profile_read"})
 	 */
 	private $likeSubject;
 
