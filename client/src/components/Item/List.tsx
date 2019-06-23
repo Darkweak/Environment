@@ -52,7 +52,6 @@ export const List = compose(
         }
         <Modal show={isOpen} onHide={() => setOpen(false)}/>
         <SearchSubject/>
-        {console.log(subjectsCreated)}
         <div className="row m-0">{
             isFetchingList ?
                 <Loader text={'Chargement des sujets en cours'} /> :

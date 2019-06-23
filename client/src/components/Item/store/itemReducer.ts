@@ -41,7 +41,6 @@ export const SubjectReducer: Reducer = (state: SubjectReducerProps = {
         case actions.SUBJECT_CREATE_SUCCESS:
             let subjectsCreated = state.subjectsCreated;
             subjectsCreated.push(payload);
-            console.log(subjectsCreated);
             resetForm();
             return {
                 ...state,

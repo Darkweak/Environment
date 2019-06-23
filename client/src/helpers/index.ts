@@ -8,6 +8,12 @@ export const resetForm = () => {
     }
 };
 
+export const isGrantedToAccessToResource = () => {
+    if (!getToken()) {
+        window.location.pathname = '/'
+    }
+}
+
 const CATEGORIES = 'categories';
 const TOKEN = 'token';
 const THEME = 'theme';

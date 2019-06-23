@@ -2,13 +2,11 @@ import React from 'react';
 import { Layout } from "../Layout";
 import { UpdatePassword } from "../Form/UpdatePassword";
 import { lifecycle } from "recompose";
-import { getToken } from "../../helpers";
+import { isGrantedToAccessToResource } from "../../helpers";
 
 export const ChangePassword: any = lifecycle({
     componentDidMount() {
-        if (!getToken()) {
-            window.location.pathname = '/'
-        }
+        isGrantedToAccessToResource();
     }
 })(() => (
     <Layout title={'Changement de votre mot de passe'} container>

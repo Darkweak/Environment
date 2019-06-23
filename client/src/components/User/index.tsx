@@ -1,6 +1,6 @@
 import React from 'react';
 import { IChildren, Layout } from "../Layout";
-import { getUsername } from "../../helpers";
+import { getUsername, isGrantedToAccessToResource } from "../../helpers";
 import { compose } from "redux";
 import { UserReducerProps } from "./store/userReducer";
 import { connect } from "react-redux";
@@ -45,6 +45,7 @@ export const Profile: any = compose(
     ),
     lifecycle({
         componentDidMount() {
+            isGrantedToAccessToResource();
             const { getUserInfos }: any = this.props;
             getUserInfos();
         }
